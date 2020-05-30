@@ -45,7 +45,7 @@ def create_job(request):
 
 
 def get_all_jobs(request):
-    queryset = Job.objects.order_by('-id')
+    queryset = Job.objects.exclude(employee__isnull=True).order_by('-id')
     serializer = JobSerializer(queryset, many=True)
     return JsonResponse(serializer.data, safe=False)
 

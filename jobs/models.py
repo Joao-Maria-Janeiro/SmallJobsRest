@@ -18,7 +18,7 @@ class Job(models.Model):
     location = models.CharField(max_length = 100)
     phone_number = models.CharField(max_length = 100)
     employer = models.ForeignKey(User, related_name="employer", on_delete=models.CASCADE)
-    employee = models.ForeignKey(User, related_name="employee",on_delete=models.CASCADE, null=True)
+    employee = models.ForeignKey(User, related_name="employee",on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.title

@@ -66,3 +66,61 @@ jobs/all
 ]
 
 ```
+jobs/employee-accept-job
+#### Input
+```json
+    "id": 7 //Job id
+```
+#### Output
+
+This function has no output.
+
+
+
+
+jobs/get-all-job-qeued-users
+#### Input
+```json
+    "id": 7 //Job id
+```
+
+#### Output
+```json
+[
+    {
+        "id": 12,  //User Id
+        "userprofile": {
+            "age": 18,
+            "phone_number": "123456789",
+            "description": "Small Job Description",
+            "skills": [
+                {
+                    "id": 4,
+                    "name": "firstskill"
+                },
+                {
+                    "id": 5,
+                    "name": "secondskill"
+                },
+                {
+                    "id": 6,
+                    "name": "thrirdskill"
+                }
+            ]
+        },
+        "password": "pbkdf2_sha256$150000$sF6LmgbEEcey$JfD3B4sgKrHbeHmPjFY659E5433USDoV0D4cxdqzrng=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "username1",
+        "first_name": "FirstName",
+        "last_name": "LastName",
+        "email": "mail@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2020-05-30T22:26:52.260579Z",
+        "groups": [],
+        "user_permissions": []
+    }
+]
+
+```

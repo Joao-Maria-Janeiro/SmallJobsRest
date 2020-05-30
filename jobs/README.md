@@ -70,13 +70,6 @@ jobs/employee-accept-job
 ```json
     "id": 7 //Job id
 ```
-#### Output
-
-This function has no output.
-
-
-
-
 jobs/get-all-job-qeued-users
 #### Input
 ```json
@@ -115,4 +108,25 @@ jobs/get-all-job-qeued-users
     }
 ]
 
+```   
+jobs/employer-accept-employee
+
+- Key: Authorization
+- Value: Bearer c0c20ea64b7c0aca69891ee5eced6f1e2b34df8e <Employer Token>
+#### Input
+
+```json
+{
+    "id": 7,
+    "email": "employee_email@gmail.com"
+}
 ```
+jobs/employer-decline-employee
+#### Input
+```json
+{
+    "id": 7,
+    "email": "employee_email@gmail.com"
+}
+```
+

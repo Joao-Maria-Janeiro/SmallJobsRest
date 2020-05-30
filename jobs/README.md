@@ -88,7 +88,7 @@ jobs/get-all-job-qeued-users
 ```json
 [
     {
-        "id": 12,  <!UserId>
+        "id": 12,  <UserId>
         "userprofile": {
             "age": 18,
             "phone_number": "123456789",
@@ -107,19 +107,12 @@ jobs/get-all-job-qeued-users
                     "name": "thrirdskill"
                 }
             ]
-        },
-        "password": "pbkdf2_sha256$150000$sF6LmgbEEcey$JfD3B4sgKrHbeHmPjFY659E5433USDoV0D4cxdqzrng=",
-        "last_login": null,
-        "is_superuser": false,
+        }
         "username": "username1",
         "first_name": "FirstName",
         "last_name": "LastName",
-        "email": "mail@gmail.com",
-        "is_staff": false,
-        "is_active": true,
-        "date_joined": "2020-05-30T22:26:52.260579Z",
-        "groups": [],
-        "user_permissions": []
+        "email": "mail@gmail.com"
+      
     }
 ]
 

@@ -80,7 +80,7 @@ jobs/get-all-job-qeued-users
 ```json
 [
     {
-        "id": 12,  <UserId>
+        "id": 12,
         "userprofile": {
             "age": 18,
             "phone_number": "123456789",
@@ -99,7 +99,8 @@ jobs/get-all-job-qeued-users
                     "name": "thrirdskill"
                 }
             ]
-        }
+        },
+        
         "username": "username1",
         "first_name": "FirstName",
         "last_name": "LastName",

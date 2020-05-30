@@ -1,9 +1,8 @@
-jobs/create
-
-
 In the header:
 - Key: Authorization
 - Value: Bearer 4ff21d27977120cf76ee5379ab0f5dda32ff8fcf 
+
+jobs/create
 
 #### Input
 ```json

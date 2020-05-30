@@ -7,6 +7,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from .models import Skill
 from .serializers import SkillSerializer
+from jobs.views import get_user
+from jobs.serializers import JobSerializer
 
 # Helper methods
 
@@ -67,3 +69,22 @@ def login(request):
             return JsonResponse({"error":"login failed"})
     else:
         return HttpResponse('POST ONLY')
+
+
+def previous_jobs(request):
+    user = get_user(request)
+    if user == False:
+        return JsonResponse({'error': 'User not found'})
+
+    jobs = user.employee.all()
+    serializer = JobSerializer(jobs, many=True)
+    return JsonResponse(serializer.data, safe=False)
+
+def my_created_jobs(request):
+    user = get_user(request)
+    if user == False:
+        return JsonResponse({'error': 'User not found'})
+
+    jobs = user.employer.all()
+    serializer = JobSerializer(jobs, many=True)
+    return JsonResponse(serializer.data, safe=False)

@@ -88,7 +88,7 @@ jobs/get-all-job-qeued-users
 ```json
 [
     {
-        "id": 12,  //UserId
+        "id": 12,  <!UserId>
         "userprofile": {
             "age": 18,
             "phone_number": "123456789",

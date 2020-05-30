@@ -5,10 +5,14 @@ from django.contrib.auth.models import User
 from django.conf import settings
 
 
+
 User = get_user_model()
 
 class Skill(models.Model):
     name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -16,6 +20,8 @@ class UserProfile(models.Model):
     phone_number = models.CharField(max_length=20)
     description = models.TextField()
     profile_pic = models.ImageField(upload_to='page_image', blank=True)
+    #Add Suggested Skills /Autocomplete Skills
+    skills = models.ManyToManyField(Skill, blank=True)
 
     def __str__(self):
         return self.user.username

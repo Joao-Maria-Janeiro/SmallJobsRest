@@ -5,6 +5,8 @@ from rest_framework.authtoken.models import Token
 import json
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
+from .models import Skill
+from .serializers import SkillSerializer
 
 # Helper methods
 
@@ -30,11 +32,14 @@ def signup(request):
         user.userprofile.age = body['age']
         user.userprofile.phone_number = body['phone_number']
         user.userprofile.description = body['description']
+        for skill_body in body['skills']:
+            user.userprofile.skills.add(Skill.objects.get_or_create(name=skill_body.lower())[0])
         user.userprofile.save()
         user.save()
         return JsonResponse({'error': ''})
     else:
         return JsonResponse({"error":"Must be a POST request"})
+
 
 def login(request):
     if request.method == 'POST':
@@ -47,6 +52,8 @@ def login(request):
         user = User.objects.get(email = email)
         authenticated = authenticate(username=user.username, password=password)
         if authenticated is not None:
+            queryset = user.userprofile.skills
+            serializer = SkillSerializer(queryset, many=True)
             token = Token.objects.get_or_create(user=user)
             return JsonResponse({"token": token[0].key,
             "first_name": user.first_name, 
@@ -54,7 +61,8 @@ def login(request):
             "email": user.email, 
             "age": user.userprofile.age, 
             "phone_number":user.userprofile.phone_number, 
-            "description": user.userprofile.description })
+            "description": user.userprofile.description, 
+            "skills": serializer.data})
         else:
             return JsonResponse({"error":"login failed"})
     else:

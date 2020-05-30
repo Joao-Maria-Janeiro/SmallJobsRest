@@ -19,7 +19,7 @@ class Job(models.Model):
     phone_number = models.CharField(max_length = 100)
     employer = models.ForeignKey(User, related_name="employer", on_delete=models.CASCADE)
     employee = models.ForeignKey(User, related_name="employee",on_delete=models.CASCADE, null=True, blank=True)
-    employee_queue = models.ManyToManyField(User, related_name="employee_queue")
+    employee_queue = models.ManyToManyField(User, related_name="employee_queue", blank=True)
 
     def __str__(self):
         return self.title

@@ -1,5 +1,7 @@
 from rest_framework import serializers
 from .models import Skill, UserProfile, User
+from django.contrib.auth.models import User
+
 
 class SkillSerializer(serializers.ModelSerializer):
     class Meta:
@@ -13,3 +15,8 @@ class UserProfileSerializer(serializers.ModelSerializer):
         fields = ('age', 'phone_number', 'description', 'skills')
 
 
+class UserSerializer(serializers.ModelSerializer):
+    userprofile = UserProfileSerializer()
+    class Meta:
+        model = User
+        fields = '__all__'

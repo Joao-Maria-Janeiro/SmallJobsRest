@@ -5,7 +5,7 @@ import json
 from .models import Job
 import datetime
 from .serializers import JobSerializer
-
+from users.serializers import UserSerializer
 
 def get_user(request):
     try:
@@ -45,7 +45,65 @@ def create_job(request):
 
 
 def get_all_jobs(request):
-    queryset = Job.objects.exclude(employee__isnull=True).order_by('-id')
+    queryset = Job.objects.exclude(employee__isnull=False).order_by('-id')
     serializer = JobSerializer(queryset, many=True)
+    return JsonResponse(serializer.data, safe=False)
+
+
+def employee_accept_job(request):
+    employee = get_user(request)
+    if employee == False:
+        return JsonResponse({'error': 'User not found'})
+
+    body_unicode = request.body.decode('utf-8')
+    body = json.loads(body_unicode)
+    
+    job = None
+    try:
+        job = Job.objects.get(id=body['id'])
+    except:
+        return JsonResponse({'error': 'There was an error fetching your job'})
+    
+    job.employee_queue.add(employee)
+    return JsonResponse({'error': ''})
+
+
+def employer_accept_employee(request):
+    employer = get_user(request)
+    if employer == False:
+        return JsonResponse({'error': 'User not found'}) 
+
+    body_unicode = request.body.decode('utf-8')
+    body = json.loads(body_unicode)
+
+    job = None
+    try:
+        job = Job.objects.get(id=body['id'])
+    except:
+        return JsonResponse({'error': 'There was an error fetching your job'})
+    
+    employee = None
+    try:
+        employee = User.objects.get(email = body['email'])
+    except:
+        return JsonResponse({'error': 'We weren\'t able to fetch the employee!'})
+
+    job.employee = employee
+    job.employee_queue.clear()
+    job.save()
+    return JsonResponse({'error': ''})
+
+def get_all_job_qeued_users(request):
+    body_unicode = request.body.decode('utf-8')
+    body = json.loads(body_unicode)
+    
+    job = None
+    try:
+        job = Job.objects.get(id=body['id'])
+    except:
+        return JsonResponse({'error': 'There was an error fetching your job'})
+    
+    qeue = job.employee_queue.all()
+    serializer = UserSerializer(qeue, many=True)
     return JsonResponse(serializer.data, safe=False)
 

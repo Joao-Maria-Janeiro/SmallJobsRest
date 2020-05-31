@@ -24,22 +24,22 @@ def create_job(request):
     body_unicode = request.body.decode('utf-8')
     body = json.loads(body_unicode)
     
-    # try:
-    job = Job(
-        title=body['title'],
-        description = body['description'],
-        start_date = datetime.datetime.strptime(body['start_date'], "%Y-%m-%d").date(),
-        end_date = datetime.datetime.strptime(body['end_date'], "%Y-%m-%d").date(),
-        payment =body['payment'],
-        start_time = datetime.datetime.strptime(body['start_time'], '%H:%M').time(),
-        end_time = datetime.datetime.strptime(body['end_time'], "%H:%M").time(),
-        location = body['location'],
-        phone_number = body['phone_number'],
-        employer = user
-    )
-    job.save()
-    # except:
-    #     return JsonResponse({'error': 'There was an error creating the job, please try again!'})
+    try:
+        job = Job(
+            title=body['title'],
+            description = body['description'],
+            start_date = datetime.datetime.strptime(body['start_date'], "%Y-%m-%d").date(),
+            end_date = datetime.datetime.strptime(body['end_date'], "%Y-%m-%d").date(),
+            payment =body['payment'],
+            start_time = datetime.datetime.strptime(body['start_time'], '%H:%M').time(),
+            end_time = datetime.datetime.strptime(body['end_time'], "%H:%M").time(),
+            location = body['location'],
+            phone_number = body['phone_number'],
+            employer = user
+        )
+        job.save()
+    except:
+        return JsonResponse({'error': 'There was an error creating the job, please try again!'})
     return JsonResponse({'error': ''})    
 
 

@@ -10,4 +10,5 @@ urlpatterns = [
     path('employer-accept-employee', csrf_exempt(views.employer_accept_employee), name="employer_accept_employee"),
     path('get-all-job-qeued-users', csrf_exempt(views.get_all_job_qeued_users), name="get_all_job_qeued_users"),
     path('employer-decline-employee', csrf_exempt(views.employer_decline_employee), name="employer_decline_employee"),
+    path('edit_job',csrf_exempt(views.edit_job), name="edit_job" ),
 ]

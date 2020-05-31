@@ -133,3 +133,39 @@ def employer_decline_employee(request):
     return JsonResponse({'error': ''})
 
 
+def edit_job (request):
+    if request.method == 'POST':
+        body_unicode = request.body.decode('utf-8')
+        body = json.loads(body_unicode)
+         
+        employer = get_user(request)
+        if employer == False:
+            return JsonResponse({'error': 'User not found'})
+
+        job = None
+        try:
+            job = Job.objects.get(id=body['id'])
+        except:
+            return JsonResponse({'error': 'There was an error fetching your job'})
+        if 'title' in body:
+            job.title = body['title']
+        if 'description' in body:    
+            job.description = body['description']
+        if 'start_date' in body:
+            job.start_date = datetime.datetime.strptime(body['start_date'], "%Y-%m-%d").date()
+        if 'end_date' in body:
+            job.end_date = datetime.datetime.strptime(body['end_date'], "%Y-%m-%d").date()
+        if 'payment' in body:
+            job.payment =body['payment']
+        if 'start_time' in body:
+            job.start_time = datetime.datetime.strptime(body['start_time'], '%H:%M').time()
+        if 'end_time' in body:
+            job.end_time = datetime.datetime.strptime(body['end_time'], "%H:%M").time()
+        if 'location' in body:
+            job.location = body['location']
+        if 'phone_number' in body:
+            job.phone_number = body['phone_number']
+        
+        job.save()
+        return JsonResponse({'error': ''})
+

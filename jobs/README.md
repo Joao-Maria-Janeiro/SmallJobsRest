@@ -130,4 +130,21 @@ jobs/employer-decline-employee
     "email": "employee_email@gmail.com"
 }
 ```
+jobs/edit_job
+#### Input
+```json
+{	
+	"id": 6,
+    "title": "JobTitle",
+    "description": "Small Job Description",
+    "start_date" : "2012-12-12",
+    "end_date" : "2012-06-12",
+    "start_time" : "12:12",
+    "end_time" : "18:18",
+    "payment": 12.32,   
+    "location": "local",
+    "phone_number": "123456789"
+}
+
+```
 

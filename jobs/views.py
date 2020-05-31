@@ -28,8 +28,8 @@ def create_job(request):
         job = Job(
             title=body['title'],
             description = body['description'],
-            start_date = datetime.datetime.strptime(body['start_date'], "%d-%m-%Y").date(),
-            end_date = datetime.datetime.strptime(body['end_date'], "%d-%m-%Y").date(),
+            start_date = datetime.datetime.strptime(body['start_date'], "%Y-%m-%d").date(),
+            end_date = datetime.datetime.strptime(body['end_date'], "%Y-%m-%d").date(),
             payment =body['payment'],
             start_time = datetime.datetime.strptime(body['start_time'], '%H:%M').time(),
             end_time = datetime.datetime.strptime(body['end_time'], "%H:%M").time(),
